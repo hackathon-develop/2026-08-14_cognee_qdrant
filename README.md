@@ -25,3 +25,31 @@ Come show us your creativity and innovation in this special hackathon, where you
 Get a chance to meet the CEO of Cognee and Qdrant while you're at it, and enjoy some free food and drinks.
 
 Hope to see you there!-08-14_cognee_qdrant
+
+
+
+### -
+​Project ideas of what to build:
+
+​Onboarding buddy: Seed with a handful of docs, then let a new joiner ask the questions they'd otherwise DM three people about.
+
+​Slack + one more agent: Add GitHub issues or meeting notes through cognee.add() so a Slack question can be answered from a source that isn't Slack.
+
+​Weekly digest: Cluster what was remembered this week and post a summary.
+
+​
+
+Judging criteria:
+
+​Your project runs and is ready to use on Monday (5pt)
+
+​Depth of the stack, not breadt (0-5pt)
+
+​Complexity of your project (subagents, additional tooling etc.) (0-5pt)
+
+​Novel application (0-5pt)
+
+#### -
+
+https://luma.com/cognee-m078?tk=NHKCwf
+​
