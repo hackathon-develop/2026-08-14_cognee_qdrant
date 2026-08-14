@@ -1,1 +1,27 @@
-# 2026-08-14_cognee_qdrant
+# 2026
+Key links:
+
+Event slack: https://join.slack.com/t/hacknightgroup/shared_invite/zt-46s18ngo0-_OCkw280819vb~9bGoi_qA
+
+Cognee slack documentation: https://docs.cognee.ai/integrations/slack-integration#slack
+
+How Congee uses Qdrant under the hood (technical deep dive for the curious): https://claude.ai/code/artifact/e7f14b71-e4d1-45b4-b306-28b7ba1ec12a
+
+What is ngrok: https://ngrok.com/docs/what-is-ngrok
+
+Slack apps: https://api.slack.com/apps
+
+Qdrant
+Aug 10, 9:36 AM
+Memory should not live in a markdown file
+Most agent harnesses use simple markdown files for memory.
+
+This can't effectively manage memory shared across a team, longer than a context window, or scoped by who is allowed to see what.
+
+Slack presents these challenges and Cognee solves it. But the use cases are endless.
+
+Come show us your creativity and innovation in this special hackathon, where you'll use Cognee's new Slack integration and Qdrant to build agentic memory for the real world.
+
+Get a chance to meet the CEO of Cognee and Qdrant while you're at it, and enjoy some free food and drinks.
+
+Hope to see you there!-08-14_cognee_qdrant
