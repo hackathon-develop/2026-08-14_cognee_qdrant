@@ -41,6 +41,16 @@ def verify_slack_signature(body: bytes, timestamp: str, signature: str, signing_
     return hmac.compare_digest(digest, signature)
 
 
+async def safe_recall(query: str, top_k: int) -> list:
+    # ponytail: match by class name so we don't import a private cognee path
+    try:
+        return await cognee.recall(query, datasets=[DATASET], top_k=top_k) or []
+    except Exception as exc:
+        if type(exc).__name__ == "RecallPreconditionError":
+            return []
+        raise
+
+
 def extract_text(result) -> str:
     for attr in ("text", "content", "answer"):
         value = getattr(result, attr, None)
@@ -68,9 +78,9 @@ async def build_digest(topic: str) -> dict:
 
     for title, hint in DIGEST_SECTIONS:
         query = f"{hint} from {scope} in the Slack team memory dataset"
-        results = await cognee.recall(query, datasets=[DATASET], top_k=3)
+        results = await safe_recall(query, top_k=3)
         lines = []
-        for result in results or []:
+        for result in results:
             text = extract_text(result).strip()
             if not text:
                 continue
@@ -103,7 +113,7 @@ async def handle_command(command: str, text: str) -> dict:
         return {"response_type": "ephemeral", "text": f"🧠 Remembered: {memory}"}
 
     if command == "/cogneeeee-ask":
-        results = await cognee.recall(text, datasets=[DATASET], top_k=5)
+        results = await safe_recall(text, top_k=5)
         if not results:
             return {"response_type": "ephemeral", "text": "No memory found for that yet."}
         lines = [extract_text(r) for r in results]
