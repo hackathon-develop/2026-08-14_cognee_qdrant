@@ -85,7 +85,7 @@ async def build_digest(topic: str) -> dict:
     if not sections:
         return {
             "response_type": "ephemeral",
-            "text": f"No digestable memory found for {scope} yet. Add a few `/cognee-remember` items first.",
+            "text": f"No digestable memory found for {scope} yet. Add a few `/cogneeeee-remember` items first.",
         }
 
     header = f"🗞️ Weekly digest for {scope}"
@@ -94,22 +94,22 @@ async def build_digest(topic: str) -> dict:
 
 async def handle_command(command: str, text: str) -> dict:
     text = text.strip()
-    if not text and command in {"/cognee-remember", "/cognee-ask"}:
+    if not text and command in {"/cogneeeee-remember", "/cogneeeee-ask"}:
         return {"response_type": "ephemeral", "text": f"Usage: `{command} <text>`"}
 
-    if command == "/cognee-remember":
+    if command == "/cogneeeee-remember":
         memory = timestamped_memory(text)
         await cognee.remember(memory, dataset_name=DATASET)
         return {"response_type": "ephemeral", "text": f"🧠 Remembered: {memory}"}
 
-    if command == "/cognee-ask":
+    if command == "/cogneeeee-ask":
         results = await cognee.recall(text, datasets=[DATASET], top_k=5)
         if not results:
             return {"response_type": "ephemeral", "text": "No memory found for that yet."}
         lines = [extract_text(r) for r in results]
         return {"response_type": "ephemeral", "text": format_bullets(lines, "No memory found for that yet.")}
 
-    if command == "/cognee-digest":
+    if command == "/cogneeeee-digest":
         return await build_digest(text)
 
     return {"response_type": "ephemeral", "text": f"Unknown command: {command}"}

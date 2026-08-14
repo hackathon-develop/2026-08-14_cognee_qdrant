@@ -29,43 +29,46 @@ Hope to see you there!-08-14_cognee_qdrant
 
 
 ### -
-​Project ideas of what to build:
+Project ideas of what to build:
 
-​Onboarding buddy: Seed with a handful of docs, then let a new joiner ask the questions they'd otherwise DM three people about.
+Onboarding buddy: Seed with a handful of docs, then let a new joiner ask the questions they'd otherwise DM three people about.
 
-​Slack + one more agent: Add GitHub issues or meeting notes through cognee.add() so a Slack question can be answered from a source that isn't Slack.
+Slack + one more agent: Add GitHub issues or meeting notes through cognee.add() so a Slack question can be answered from a source that isn't Slack.
 
-​Weekly digest: Cluster what was remembered this week and post a summary.
+Weekly digest: Cluster what was remembered this week and post a summary.
 
 ### -
 
-​17:00 PM - Doors open + Networking
+17:00 PM - Doors open + Networking
 
-​17:30 PM - Opening remarks + Cognee & Qdrant intro
+17:30 PM - Opening remarks + Cognee & Qdrant intro
 
-​18:00 PM - Hacking begins
+18:00 PM - Hacking begins
 
-​21:00 PM - Project Submission Deadline – finalist selection
+21:00 PM - Project Submission Deadline – finalist selection
 
-​21:15 PM - Finalist presentations & judging
+21:15 PM - Finalist presentations & judging
 
-​21:45 PM - Awards ceremony
+21:45 PM - Awards ceremony
 
-​22:00 PM - Event wrap-up & doors close
+22:00 PM - Event wrap-up & doors close
 
 
 ### - 
-​
+
 
 Judging criteria:
 
-​​Depth of the stack, not breadt (0-5pt)
+Depth of the stack, not breadt (0-5pt)
 
-​Complexity of your project (subagents, additional tooling etc.) (0-5pt)
+Complexity of your project (subagents, additional tooling etc.) (0-5pt)
 
-​Novel application (0-5pt)
+Novel application (0-5pt)
 
 #### -
 
 https://luma.com/cognee-m078?tk=NHKCwf
-​
+
+#### - 
+
+https://docs.google.com/presentation/d/1d6aqYXS9h-L4eguv7ws1ZtlzAIKmhepdQbiHvsYiGu0/edit?usp=sharing
