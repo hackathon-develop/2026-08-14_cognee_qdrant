@@ -26,7 +26,9 @@ Get a chance to meet the CEO of Cognee and Qdrant while you're at it, and enjoy 
 
 Hope to see you there!-08-14_cognee_qdrant
 
-
+### -
+- https://github.com/topoteretes/cognee-community
+- https://github.com/qdrant-labs/cognee-demo-slack
 
 ### -
 Project ideas of what to build:
