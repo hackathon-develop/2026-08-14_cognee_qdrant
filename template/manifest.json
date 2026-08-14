@@ -1,0 +1,74 @@
+{
+    "display_information": {
+        "name": "Cogneeee",
+        "description": "Ask questions, save messages, and recall your team's shared memory — right from Slack.",
+        "background_color": "#6510F4"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "cognee",
+            "always_online": true
+        },
+        "app_home": {
+            "home_tab_enabled": true,
+            "messages_tab_enabled": true
+        },
+        "slash_commands": [
+            {
+                "command": "/cognee-ask",
+                "url": "https://gothic-outright-rippling.ngrok-free.dev/api/v1/slack/commands",
+                "description": "Ask your Cognee memory a question — reviewed privately before you share it",
+                "usage_hint": "what do we know about the Q3 launch?"
+            },
+            {
+                "command": "/cognee-remember",
+                "url": "https://gothic-outright-rippling.ngrok-free.dev/api/v1/slack/commands",
+                "description": "Save a decision or fact worth keeping — for things Slack never saw",
+                "usage_hint": "we chose Neon for v2, branching is cheaper"
+            },
+            {
+                "command": "/cognee-link",
+                "url": "https://gothic-outright-rippling.ngrok-free.dev/api/v1/slack/commands",
+                "description": "Get a private link to connect this Slack account to your own Cognee memory"
+            }
+        ],
+        "shortcuts": [
+            {
+                "name": "Remember this",
+                "type": "message",
+                "callback_id": "remember_this",
+                "description": "Save this message to your own Cognee memory, tagged with who said it and where"
+            }
+        ]
+    },
+    "oauth_config": {
+        "redirect_urls": [
+            "https://gothic-outright-rippling.ngrok-free.dev/api/v1/integrations/slack/callback"
+        ],
+        "scopes": {
+            "bot": [
+                "commands",
+                "chat:write",
+                "im:write",
+                "channels:read"
+            ]
+        }
+    },
+    "settings": {
+        "event_subscriptions": {
+            "request_url": "https://gothic-outright-rippling.ngrok-free.dev/api/v1/slack/events",
+            "bot_events": [
+                "app_uninstalled",
+                "tokens_revoked",
+                "app_home_opened"
+            ]
+        },
+        "interactivity": {
+            "is_enabled": true,
+            "request_url": "https://gothic-outright-rippling.ngrok-free.dev/api/v1/slack/interactive"
+        },
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}
