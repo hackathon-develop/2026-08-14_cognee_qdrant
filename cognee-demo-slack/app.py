@@ -110,8 +110,15 @@ async def handle_command(command: str, text: str) -> dict:
     if command == "/cogneeeee-remember":
         memory = timestamped_memory(text)
         # ponytail: add+cognify is what cognee's own precondition error tells us to run
-        await cognee.add(memory, dataset_name=DATASET)
-        await cognee.cognify(datasets=[DATASET])
+        for attempt in range(2):  # cognee aborts the first write during global-DB migration, retries succeed
+            try:
+                await cognee.add(memory, dataset_name=DATASET)
+                await cognee.cognify(datasets=[DATASET])
+                break
+            except Exception as exc:
+                if attempt == 0 and "migration" in str(exc).lower():
+                    continue
+                raise
         return {"response_type": "ephemeral", "text": f"🧠 Remembered: {memory}"}
 
     if command == "/cogneeeee-ask":
