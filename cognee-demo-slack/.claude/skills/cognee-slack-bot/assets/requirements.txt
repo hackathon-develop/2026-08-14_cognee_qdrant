@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+cognee[fastembed] @ git+https://github.com/topoteretes/cognee.git@dev
+anthropic
+certifi
+python-dotenv
+python-multipart
