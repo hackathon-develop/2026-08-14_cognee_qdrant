@@ -1,4 +1,17 @@
-# 2026
+# readme 
+i hoped that this workshop would provide more insight on cognee.
+
+in general: look at the presentation
+https://docs.google.com/presentation/d/1d6aqYXS9h-L4eguv7ws1ZtlzAIKmhepdQbiHvsYiGu0/edit?usp=sharing
+
+addon: i spent some more time after the hackathon on getting it running. the docs (tech/hackathon) were not aligned, even conflicting and the install has clear problems on windows. 
+
+the prep of the hackathon was not really made for the participants. goal was to show (as i was told) to how the new slack integration. well, i would rate it as not ready / flaky.
+
+they should have announced it as slack api integration show and i could have saved the time. slack is mostly dead.
+
+
+# -
 Key links:
 
 Event slack: https://join.slack.com/t/hacknightgroup/shared_invite/zt-46s18ngo0-_OCkw280819vb~9bGoi_qA
