@@ -109,7 +109,9 @@ async def handle_command(command: str, text: str) -> dict:
 
     if command == "/cogneeeee-remember":
         memory = timestamped_memory(text)
-        await cognee.remember(memory, dataset_name=DATASET)
+        # ponytail: add+cognify is what cognee's own precondition error tells us to run
+        await cognee.add(memory, dataset_name=DATASET)
+        await cognee.cognify(datasets=[DATASET])
         return {"response_type": "ephemeral", "text": f"🧠 Remembered: {memory}"}
 
     if command == "/cogneeeee-ask":
