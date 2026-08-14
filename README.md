@@ -37,13 +37,29 @@ Hope to see you there!-08-14_cognee_qdrant
 
 ​Weekly digest: Cluster what was remembered this week and post a summary.
 
+### -
+
+​17:00 PM - Doors open + Networking
+
+​17:30 PM - Opening remarks + Cognee & Qdrant intro
+
+​18:00 PM - Hacking begins
+
+​21:00 PM - Project Submission Deadline – finalist selection
+
+​21:15 PM - Finalist presentations & judging
+
+​21:45 PM - Awards ceremony
+
+​22:00 PM - Event wrap-up & doors close
+
+
+### - 
 ​
 
 Judging criteria:
 
-​Your project runs and is ready to use on Monday (5pt)
-
-​Depth of the stack, not breadt (0-5pt)
+​​Depth of the stack, not breadt (0-5pt)
 
 ​Complexity of your project (subagents, additional tooling etc.) (0-5pt)
 
