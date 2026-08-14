@@ -4,7 +4,7 @@ import hmac
 import time
 from unittest.mock import AsyncMock, patch
 
-from app import extract_text, handle_command, run_and_post_reply, verify_slack_signature
+from app import build_digest, extract_text, handle_command, run_and_post_reply, timestamped_memory, verify_slack_signature
 
 
 def test_signature_valid():
@@ -32,6 +32,7 @@ async def _run_handle_command_cases():
         reply = await handle_command("/cognee-remember", "the sky is blue")
         remember_mock.assert_awaited_once()
         assert "Remembered" in reply["text"]
+        assert "[saved " in reply["text"]
 
     class FakeResult:
         text = "the sky is blue"
@@ -39,6 +40,17 @@ async def _run_handle_command_cases():
     with patch("app.cognee.recall", new=AsyncMock(return_value=[FakeResult()])):
         reply = await handle_command("/cognee-ask", "what color is the sky")
         assert "sky is blue" in reply["text"]
+
+    recalls = [
+        [FakeResult()],
+        [FakeResult()],
+        [],
+        [],
+    ]
+    with patch("app.cognee.recall", new=AsyncMock(side_effect=recalls)):
+        reply = await handle_command("/cognee-digest", "this week")
+        assert "Weekly digest" in reply["text"]
+        assert "Decisions" in reply["text"]
 
     reply = await handle_command("/cognee-ask", "")
     assert "Usage" in reply["text"]
@@ -90,6 +102,22 @@ def test_extract_text():
     assert extract_text(fallback) == str(fallback)
 
 
+def test_timestamped_memory():
+    stamped = timestamped_memory("hello")
+    assert stamped.startswith("[saved ")
+    assert stamped.endswith("hello")
+
+
+async def _run_digest_empty_case():
+    with patch("app.cognee.recall", new=AsyncMock(return_value=[])):
+        reply = await build_digest("this week")
+        assert "No digestable memory found" in reply["text"]
+
+
+def test_build_digest_empty():
+    asyncio.run(_run_digest_empty_case())
+
+
 if __name__ == "__main__":
     test_signature_valid()
     test_signature_invalid()
@@ -97,4 +125,6 @@ if __name__ == "__main__":
     test_handle_command()
     test_run_and_post_reply()
     test_extract_text()
+    test_timestamped_memory()
+    test_build_digest_empty()
     print("ok")
