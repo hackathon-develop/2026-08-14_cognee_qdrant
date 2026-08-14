@@ -30,6 +30,10 @@ Hope to see you there!-08-14_cognee_qdrant
 - https://github.com/topoteretes/cognee-community
 - https://github.com/qdrant-labs/cognee-demo-slack
 
+- https://dashboard.ngrok.com/get-started/share-localhost
+- https://docs.cognee.ai/integrations/slack-integration#slack
+
+  
 ### -
 Project ideas of what to build:
 
