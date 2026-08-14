@@ -12,6 +12,11 @@ features:
       description: Ask Cognee's memory a question
       usage_hint: "[question]"
       should_escape: false
+    - command: /cognee-digest
+      url: https://preamble-sinner-bottom.ngrok-free.dev/api/v1/slack/commands
+      description: Summarize this week's remembered items
+      usage_hint: "[optional topic or time window]"
+      should_escape: false
     - command: /cognee-remember
       url: https://preamble-sinner-bottom.ngrok-free.dev/api/v1/slack/commands
       description: Store a fact in Cognee's memory

@@ -1,9 +1,14 @@
 # Cognee Slack demo
 
-Minimal Slack bot: `/cognee-remember <fact>` stores it in Cognee memory,
-`/cognee-ask <question>` recalls it. One shared memory dataset for the whole
-workspace — no per-user account linking, no OAuth, no bot token needed since
-replies go back directly in the slash-command response.
+Minimal Slack bot:
+
+- `/cognee-remember <fact>` stores it in Cognee memory
+- `/cognee-ask <question>` recalls it
+- `/cognee-digest [topic or time window]` builds a lightweight weekly digest
+
+One shared memory dataset for the whole workspace — no per-user account
+linking, no OAuth, no bot token needed since replies go back directly in the
+slash-command response.
 
 ## Run it
 
@@ -30,8 +35,12 @@ Put the ngrok URL into `slack-manifest.yaml` in place of `<public-host>`
 2. Paste the contents of `slack-manifest.yaml`
 3. Install the app to your workspace
 4. Copy **Signing Secret** (Basic Information) into `.env` as `SLACK_SIGNING_SECRET`, restart `app.py`
-5. In Slack: `/cognee-remember Qdrant is Andrei's employer`, then
-   `/cognee-ask where does Andrei work`
+5. In Slack, try:
+   - `/cognee-remember Decision: use Qdrant Cloud for the demo`
+   - `/cognee-remember Blocker: ngrok URL changes on restart`
+   - `/cognee-remember Owner: Alice is handling Slack app setup`
+   - `/cognee-ask who is handling Slack app setup`
+   - `/cognee-digest this week`
 
 ## Test
 
@@ -41,6 +50,17 @@ python3 test_app.py
 
 Covers signature verification (valid/invalid/expired) and command handling,
 with `cognee.remember`/`cognee.recall` mocked — no LLM calls in the test.
+
+## Hackathon framing
+
+This repo now fits a "Weekly Digest Generator" demo:
+
+- remember decisions, blockers, owners, and questions during the session
+- ask ad hoc questions with `/cognee-ask`
+- generate a concise recap with `/cognee-digest`
+
+For the best live result, prefix memories with labels like `Decision:`,
+`Blocker:`, `Owner:`, or `Question:`.
 
 ## Skipped for this demo
 

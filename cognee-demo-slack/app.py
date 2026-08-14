@@ -3,6 +3,7 @@ import hmac
 import os
 import ssl
 import time
+from datetime import datetime, timezone
 
 import aiohttp
 import certifi
@@ -21,6 +22,13 @@ DATASET = "slack"
 SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 app = FastAPI()
+DEFAULT_DIGEST_WINDOW = "this week"
+DIGEST_SECTIONS = (
+    ("Decisions", "decisions, agreements, chosen approaches"),
+    ("Blockers", "blockers, risks, issues, things that are stuck"),
+    ("Owners", "owners, responsibilities, people assigned to work"),
+    ("Open questions", "open questions, unresolved topics, pending decisions"),
+)
 
 
 def verify_slack_signature(body: bytes, timestamp: str, signature: str, signing_secret: str) -> bool:
@@ -41,21 +49,68 @@ def extract_text(result) -> str:
     return str(result)
 
 
+def timestamped_memory(text: str) -> str:
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    return f"[saved {stamp}] {text}"
+
+
+def format_bullets(lines: list[str], fallback: str) -> str:
+    items = [line.strip() for line in lines if line and line.strip()]
+    if not items:
+        return fallback
+    return "\n".join(f"• {item}" for item in items)
+
+
+async def build_digest(topic: str) -> dict:
+    scope = topic.strip() or DEFAULT_DIGEST_WINDOW
+    seen = set()
+    sections = []
+
+    for title, hint in DIGEST_SECTIONS:
+        query = f"{hint} from {scope} in the Slack team memory dataset"
+        results = await cognee.recall(query, datasets=[DATASET], top_k=3)
+        lines = []
+        for result in results or []:
+            text = extract_text(result).strip()
+            if not text:
+                continue
+            key = text.casefold()
+            if key in seen:
+                continue
+            seen.add(key)
+            lines.append(text)
+        if lines:
+            sections.append(f"*{title}*\n{format_bullets(lines, '')}")
+
+    if not sections:
+        return {
+            "response_type": "ephemeral",
+            "text": f"No digestable memory found for {scope} yet. Add a few `/cognee-remember` items first.",
+        }
+
+    header = f"🗞️ Weekly digest for {scope}"
+    return {"response_type": "ephemeral", "text": f"{header}\n\n" + "\n\n".join(sections)}
+
+
 async def handle_command(command: str, text: str) -> dict:
     text = text.strip()
-    if not text:
+    if not text and command in {"/cognee-remember", "/cognee-ask"}:
         return {"response_type": "ephemeral", "text": f"Usage: `{command} <text>`"}
 
     if command == "/cognee-remember":
-        await cognee.remember(text, dataset_name=DATASET)
-        return {"response_type": "ephemeral", "text": f"🧠 Remembered: {text}"}
+        memory = timestamped_memory(text)
+        await cognee.remember(memory, dataset_name=DATASET)
+        return {"response_type": "ephemeral", "text": f"🧠 Remembered: {memory}"}
 
     if command == "/cognee-ask":
         results = await cognee.recall(text, datasets=[DATASET], top_k=5)
         if not results:
             return {"response_type": "ephemeral", "text": "No memory found for that yet."}
         lines = [extract_text(r) for r in results]
-        return {"response_type": "ephemeral", "text": "\n".join(f"• {l}" for l in lines if l)}
+        return {"response_type": "ephemeral", "text": format_bullets(lines, "No memory found for that yet.")}
+
+    if command == "/cognee-digest":
+        return await build_digest(text)
 
     return {"response_type": "ephemeral", "text": f"Unknown command: {command}"}
 
